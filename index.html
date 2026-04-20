@@ -2044,7 +2044,7 @@
       'boss.name': 'Cehalet Gölgesi',
 
       // Tasks
-      'task.talk-start':     'Kâşif KütüBot ile konuş',
+      'task.talk-start':     'Pırpır ile konuş',
       'task.collect-books':  '4 kitap topla',
       'task.collect-runes':  '3 rün parçası bul',
       'task.find-key':       'Labirent anahtarını al',
@@ -2090,12 +2090,12 @@
       'npc.kivilcim.short': 'Final salonuna geldin. Cehalet Gölgesi yakında! Saldırını iyi zamanla 🔥',
 
       // NPC detailed multi-turn dialogues (pressed E opens panel with these)
-      'npc.kutubot.name': 'Kâşif KütüBot',
+      'npc.kutubot.name': 'Pırpır',
       'npc.kutubot.role': 'Baş Rehber · Görev Veren',
       'npc.kutubot.d1': '📚 Hoş geldin genç kaşif! Ben Kâşif KütüBot, bu kütüphanenin baş rehberiyim. Cehalet Gölgesi raflarımıza sızdı ve kitapların ışığını söndürdü.',
       'npc.kutubot.d2': 'Görevin: raflara saçılmış 4 kitabı topla, 3 rün parçasını birleştir, anahtarı bul ve mühürlü kapıyı aç. Sonunda Gölge\'yi yenip Bilgelik Taşı\'nı aktive etmelisin.',
       'npc.kutubot.d3': '💡 İpucu: Kitap toplamak hem puan verir hem seviye atlatır. Seviye atladığında canın ve kalkan sürem uzar. İlerledikçe diğer rehberler (Yaprak, Zipzip, Kıvılcım) sana özel tavsiyeler verecek.',
-      'npc.kutubot.d4': 'Hazır olduğunda doğu koridoruna ilerle. Macera başlasın! ✨',
+      'npc.kutubot.d4': 'Hazırsan şimdi elini raflara uzat, kitapları topla ve ilerle. Sıkışırsan yeniden yanıma gel; sana kısa hatırlatmalar yaparım. Macera başlasın! ✨',
 
       'npc.yaprak.name': 'Yaprak',
       'npc.yaprak.role': 'Şifa Rehberi · Koruma',
@@ -2274,7 +2274,7 @@
       'boss.name': 'Shadow of Ignorance',
 
       // Tasks
-      'task.talk-start':     'Talk to Explorer BookBot',
+      'task.talk-start':     'Talk to Pirpir',
       'task.collect-books':  'Collect 4 books',
       'task.collect-runes':  'Find 3 rune pieces',
       'task.find-key':       'Get the labyrinth key',
@@ -2314,18 +2314,18 @@
       'char.tip.kivilcim': 'Use attack quickly but controlled during boss fight.',
 
       // NPC short bubbles
-      'npc.kutubot.short': 'The magic library is open! Collect books, combine runes and head east.',
+      'npc.kutubot.short': 'Hi! I am Pirpir. Your first quest starts here: talk to me, claim your starter gift, then head east! ✨',
       'npc.yaprak.short': 'Be careful in the Silence Hall. Use dash when shadows speed up 🌿',
       'npc.zipzip.short': 'Key is close! Jump to the high shelves, then return to the sealed gate ✦',
       'npc.kivilcim.short': 'You reached the final hall. Shadow of Ignorance is near! Time your attacks well 🔥',
 
       // NPC detailed dialogues
-      'npc.kutubot.name': 'Explorer BookBot',
-      'npc.kutubot.role': 'Chief Guide · Quest Giver',
-      'npc.kutubot.d1': '📚 Welcome, young explorer! I am Explorer BookBot, chief guide of this library. The Shadow of Ignorance slipped onto our shelves and dimmed the light of the books.',
-      'npc.kutubot.d2': 'Your quest: collect 4 scattered books, combine 3 rune pieces, find the key, and open the sealed gate. Finally, defeat the Shadow and activate the Wisdom Stone.',
-      'npc.kutubot.d3': '💡 Tip: Collecting books grants score and levels you up. Leveling raises your HP and shield time. Other guides (Yaprak, Zipzip, Kivilcim) will give special tips as you progress.',
-      'npc.kutubot.d4': 'When you\'re ready, head to the east corridor. Let the adventure begin! ✨',
+      'npc.kutubot.name': 'Pirpir',
+      'npc.kutubot.role': 'Reading Guide · Quest Giver',
+      'npc.kutubot.d1': '📚 Welcome, young explorer! I am Pirpir. I will be your first guide in this magical library. The Shadow of Ignorance crept onto the shelves and dimmed the light of the books.',
+      'npc.kutubot.d2': 'Your first quest from me: collect 4 books, combine 3 rune pieces, find the key, and open the sealed gate. Do that, and the library light will begin to return.',
+      'npc.kutubot.d3': '💡 Tip: Books grant score and power. If you finish talking with me, I will give you a starter reward: energy, score, and a short shield boost.',
+      'npc.kutubot.d4': 'When you are ready, reach for the shelves, collect the books, and move on. If you get stuck, come back to me for a reminder. Let the adventure begin! ✨',
 
       'npc.yaprak.name': 'Yaprak',
       'npc.yaprak.role': 'Healing Guide · Protection',
@@ -2761,7 +2761,7 @@
 
     renderTasks();
     buildTeamCards();
-    setDialogue(t('npc.kutubot.name'), '📚', t('dlg.welcome_short'), '#a7e7b8');
+    setDialogue(t('npc.kutubot.name'), '📚', 'Pırpır seni bekliyor! Yanına git ve konuşmayı başlat.', '#a7e7b8');
   }
 
   /* =====================================================================
@@ -3936,9 +3936,17 @@
   const npcDialogNext = document.getElementById('npcDialogNext');
   const npcDialogClose = document.getElementById('npcDialogClose');
 
+  function setNpcPromptText(npc){
+    const label = npcPromptEl.querySelector('[data-i18n="ui.talk"]') || npcPromptEl.querySelector('span:last-child');
+    if(label){
+      label.textContent = npc ? ((npc.name || t('npc.' + npc.dialogKey + '.name')) + ' ile konuş') : t('ui.talk');
+    }
+  }
+
   function updateNpcPrompt(npc){
     if(!gameRunning || paused || !npc || (openNpc && npc === openNpc)){
       npcPromptEl.classList.remove('show');
+      setNpcPromptText(null);
       return;
     }
     // convert world coords → screen coords; position prompt above NPC head
@@ -3946,8 +3954,33 @@
     const sy = npc.y - 24;
     npcPromptEl.style.left = sx + 'px';
     npcPromptEl.style.top = sy + 'px';
+    setNpcPromptText(npc);
     npcPromptEl.classList.add('show');
   }
+
+  function grantNpcReward(npc){
+    if(!npc || npc.rewardGiven) return;
+    if(npc.dialogKey === 'kutubot'){
+      npc.rewardGiven = true;
+      player.hp = Math.min(player.maxHp, player.hp + 1);
+      player.shieldTime = Math.max(player.shieldTime, 6.5);
+      game.score += 120;
+      game.books = Math.max(game.books, 1);
+      spawnBurst(npc.x + npc.w/2, npc.y + 20, '#ffe28a', 16);
+      setDialogue(t('npc.kutubot.name'), npc.emoji || '📚', '🎁 Pırpır sana başlangıç armağanı verdi: +120 puan, +1 kitap ve koruyucu ışık!', npc.tint || '#a7e7b8');
+      showToast('Pırpır armağan verdi! ✨');
+      renderTasks();
+      updateHUD();
+    }
+  }
+
+  npcPromptEl.addEventListener('click', ()=>{
+    if(activeNearestNpc && !openNpc){ openNpcDialog(activeNearestNpc); }
+  });
+  npcPromptEl.addEventListener('touchstart', (e)=>{
+    if(e.cancelable) e.preventDefault();
+    if(activeNearestNpc && !openNpc){ openNpcDialog(activeNearestNpc); }
+  }, {passive:false});
 
   function openNpcDialog(npc){
     if(!npc) return;
@@ -3995,6 +4028,7 @@
       renderNpcDialog();
       playClick();
     } else {
+      grantNpcReward(openNpc);
       closeNpcDialog();
     }
   });
