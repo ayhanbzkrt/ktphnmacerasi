@@ -124,6 +124,12 @@
       justify-content:center;
       gap:8px;
       cursor:pointer;
+      touch-action:manipulation;
+      user-select:none;
+      -webkit-user-select:none;
+      pointer-events:auto;
+      position:relative;
+      z-index:1;
     }
     .btn-pill:hover,.btn-pill:active{transform:translateY(-2px)}
     .btn-pill.primary{
@@ -157,6 +163,10 @@
       cursor:pointer;
       transition:transform .12s ease;
       position:relative;
+      touch-action:manipulation;
+      user-select:none;
+      -webkit-user-select:none;
+      pointer-events:auto;
     }
     .round-btn:active{transform:translateY(2px) scale(.97)}
     .round-btn.big{width:96px;height:96px}
@@ -946,6 +956,29 @@
       .menu-title{font-size:40px}
     }
 
+
+
+    button,
+    .menu-close,
+    .action-circle,
+    .dpad-btn,
+    .lang-btn,
+    .team-card,
+    .tasks-head{
+      touch-action:manipulation;
+      -webkit-user-select:none;
+      user-select:none;
+      pointer-events:auto;
+    }
+
+    .overlay,
+    .menu-card,
+    .pause-overlay,
+    .npc-dialog-panel,
+    .side-drawer{
+      pointer-events:auto;
+    }
+
     /* ============================================================
        LANGUAGE TOGGLE (centered top, pill-style with flags)
        ============================================================ */
@@ -1446,7 +1479,7 @@
     </div>
 
     <div class="drawer-title" style="margin-top:16px">
-      <span data-i18n="ui.your_team">Rehberler</span>
+      <span data-i18n="ui.your_team">Takımınız</span>
     </div>
     <div class="team-grid" id="teamGrid"></div>
   </div>
@@ -1508,10 +1541,6 @@
     </div>
 
     <div class="action-pad">
-      <button class="round-btn" id="btnTalk" title="Konuş" data-i18n-title="action.talk">
-        <span class="ico">💬</span>
-        <span class="lbl" data-i18n="action.talk">KONUŞ</span>
-      </button>
       <button class="round-btn dash" id="btnDash" title="Dash" data-i18n-title="action.dash">
         <span class="ico">👟</span>
         <span class="lbl" data-i18n="action.dash">KOŞ</span>
@@ -1522,7 +1551,7 @@
       </button>
       <button class="round-btn attack" id="btnAttack" title="Saldır" data-i18n-title="action.attack">
         <span class="ico">✦</span>
-        <span class="lbl" data-i18n="action.attack">ATEŞ</span>
+        <span class="lbl" data-i18n="action.attack">SALDIR</span>
       </button>
     </div>
   </div>
@@ -1600,7 +1629,7 @@
               <path d="M32 30 Q36 33 40 30" stroke="#2c3441" stroke-width="1.5" fill="none" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="action-label" data-i18n="menu.team">REHBERLER</div>
+          <div class="action-label" data-i18n="menu.team">TAKIM</div>
         </div>
         <div class="action-circle" id="btnLearn">
           <div class="action-bubble action-learn">
@@ -1660,7 +1689,7 @@
           </div>
           <div class="howto-keys" style="margin-top:6px">
             <span class="key-cap">Space</span><span style="font-size:11px;color:var(--ink-mute)" data-i18n="action.jump_short">zıpla</span>
-            <span class="key-cap">F</span><span style="font-size:11px;color:var(--ink-mute)" data-i18n="action.attack_short">ateş</span>
+            <span class="key-cap">J</span><span style="font-size:11px;color:var(--ink-mute)" data-i18n="action.attack_short">atak</span>
             <span class="key-cap">K</span><span style="font-size:11px;color:var(--ink-mute)" data-i18n="action.dash_short">dash</span>
           </div>
           <div class="howto-keys" style="margin-top:6px">
@@ -1689,7 +1718,7 @@
             </div>
             <div class="ctrl-row">
               <span class="ctrl-label" data-i18n="ctrl.attack">Saldırı:</span>
-              <span class="ctrl-value">F / <span data-i18n="ctrl.mouse_click">Fare Tıklaması</span></span>
+              <span class="ctrl-value">J / <span data-i18n="ctrl.mouse_click">Fare Tıklaması</span></span>
             </div>
             <div class="ctrl-row">
               <span class="ctrl-label" data-i18n="ctrl.talk">Konuş / Etkileşim:</span>
@@ -1730,8 +1759,7 @@
           <div style="font-size:12.5px;line-height:1.7;color:var(--ink);font-weight:600">
             <div><b>A / D</b> <span data-i18n="ui.or">veya</span> <b>◀ ▶</b> — <span data-i18n="howto.move">Hareket</span></div>
             <div><b>Space / ▲</b> — <span data-i18n="howto.jump">Zıpla</span></div>
-            <div><b>F</b> — <span data-i18n="howto.attack">Enerji atışı</span></div>
-            <div><b>E</b> — <span data-i18n="howto.talk">Rehber NPC ile konuş</span></div>
+            <div><b>J</b> — <span data-i18n="howto.attack">Enerji saldırısı</span></div>
             <div><b>K</b> — <span data-i18n="howto.dash">Dash (hız patlaması)</span></div>
             <div><b>E</b> — <span data-i18n="howto.talk">Konuş / Rehberlerle etkileşim</span></div>
             <div><b>Esc</b> — <span data-i18n="howto.pause">Duraklat</span></div>
@@ -1898,7 +1926,7 @@
       'ui.menu': 'Menü',
       'ui.tasks': 'Görevler',
       'ui.inventory': 'Envanter',
-      'ui.your_team': 'Rehberler',
+      'ui.your_team': 'Takımınız',
       'ui.close': 'Kapat',
       'ui.map': 'Harita',
       'ui.sound': 'Ses',
@@ -1925,10 +1953,9 @@
       // Actions
       'action.dash': 'KOŞ',
       'action.jump': 'ZIPLA',
-      'action.talk': 'KONUŞ',
-      'action.attack': 'ATEŞ',
+      'action.attack': 'SALDIR',
       'action.jump_short': 'zıpla',
-      'action.attack_short': 'ateş',
+      'action.attack_short': 'atak',
       'action.dash_short': 'koş',
       'action.talk_short': 'konuş',
       'action.pause_short': 'duraklat',
@@ -1942,7 +1969,7 @@
       'intro.title': 'Kütüphane Macerası',
       'intro.text': 'Kütüphaneyi oynayarak keşfet.',
       'menu.play': 'OYNA',
-      'menu.team': 'REHBERLER',
+      'menu.team': 'TAKIM',
       'menu.learn': 'ÖĞREN',
       'menu.settings': 'AYARLAR',
       'menu.start': 'Oyuna Başla',
@@ -1973,10 +2000,10 @@
       'ctrl.jump': 'Zıpla:',
       'ctrl.space': 'Boşluk',
       'ctrl.dash': 'Koş:',
-      'ctrl.attack': 'Ateş:',
+      'ctrl.attack': 'Saldırı:',
       'ctrl.talk': 'Konuş / Etkileşim:',
       'ctrl.mouse_click': 'Fare Tıklaması',
-      'ctrl.mouse_hint': 'Menüleri gezin ve oyunu başlat',
+      'ctrl.mouse_hint': 'Menüleri Gezin & Karakter Seç',
 
       // How to
       'howto.title': 'Nasıl Oynanır?',
@@ -1986,7 +2013,7 @@
       'howto.tip': 'İpucu',
       'howto.move': 'Hareket',
       'howto.jump': 'Zıpla',
-      'howto.attack': 'Enerji atışı',
+      'howto.attack': 'Enerji saldırısı',
       'howto.dash': 'Dash (hız patlaması)',
       'howto.talk': 'Konuş / Rehberlerle etkileşim',
       'howto.pause': 'Duraklat',
@@ -2031,10 +2058,6 @@
       'toast.hurt': 'Hasar aldın!',
       'toast.fall': 'Düştün! Yeniden başlıyor…',
       'toast.level_up': '✦ Seviye atladın!',
-      'toast.difficulty': 'Zorluk: {level}',
-      'difficulty.easy': 'Keşif',
-      'difficulty.normal': 'Maceracı',
-      'difficulty.hard': 'Usta Kâşif',
       'toast.book': 'Kitap toplandı',
       'toast.rune': 'Rün toplandı',
       'toast.gem': 'Kristal toplandı',
@@ -2091,7 +2114,7 @@
       'npc.kivilcim.name': 'Kıvılcım',
       'npc.kivilcim.role': 'Savaş Rehberi · Enerji',
       'npc.kivilcim.d1': '🔥 Buraya kadar geldin, harikasın! Ben Kıvılcım, savaş rehberinim. Az sonra Cehalet Gölgesi ile karşılaşacaksın.',
-      'npc.kivilcim.d2': '⚔️ Ateş ipucu: F tuşu (veya fare tıklaması) enerji atışı gönderir. 0.35 saniye bekleme süresi var — seri ama kontrollü kullan.',
+      'npc.kivilcim.d2': '⚔️ Saldırı ipucu: J tuşu (veya fare tıklaması) enerji saldırısı gönderir. 0.35 saniye bekleme süresi var — seri ama kontrollü kullan.',
       'npc.kivilcim.d3': '👾 Boss\'un iki saldırısı var: üçlü enerji topu ve yakın mesafe slam. Slam geldiğinde dash ile uzaklaş!',
       'npc.kivilcim.d4': 'Boss\'u yendiğinde Bilgelik Taşı ortaya çıkar. Ona dokun ve kütüphaneyi aydınlat! ✨ Hazırsan ilerle, arkandayım.',
 
@@ -2133,7 +2156,7 @@
       'ui.menu': 'Menu',
       'ui.tasks': 'Tasks',
       'ui.inventory': 'Inventory',
-      'ui.your_team': 'Guides',
+      'ui.your_team': 'Your Team',
       'ui.close': 'Close',
       'ui.map': 'Map',
       'ui.sound': 'Sound',
@@ -2160,8 +2183,7 @@
       // Actions
       'action.dash': 'DASH',
       'action.jump': 'JUMP',
-      'action.talk': 'TALK',
-      'action.attack': 'FIRE',
+      'action.attack': 'ATTACK',
       'action.jump_short': 'jump',
       'action.attack_short': 'attack',
       'action.dash_short': 'dash',
@@ -2177,7 +2199,7 @@
       'intro.title': 'Library Adventure of Discovery',
       'intro.text': 'Discover the library by playing.',
       'menu.play': 'PLAY',
-      'menu.team': 'GUIDES',
+      'menu.team': 'TEAM',
       'menu.learn': 'LEARN',
       'menu.settings': 'SETTINGS',
       'menu.start': 'Start Game',
@@ -2185,7 +2207,7 @@
 
       // Tiles
       'tile.cycle': 'GAME CYCLE',
-      'tile.team': 'GUIDES',
+      'tile.team': 'YOUR TEAM',
       'tile.howto': 'HOW-TO',
       'tile.controls': 'CONTROLS',
 
@@ -2208,10 +2230,10 @@
       'ctrl.jump': 'Jump:',
       'ctrl.space': 'Space',
       'ctrl.dash': 'Dash:',
-      'ctrl.attack': 'Fire:',
+      'ctrl.attack': 'Attack:',
       'ctrl.talk': 'Talk / Interact:',
       'ctrl.mouse_click': 'Mouse Click',
-      'ctrl.mouse_hint': 'Navigate menus and start the game',
+      'ctrl.mouse_hint': 'Navigate Menus & Select Character',
 
       // How to
       'howto.title': 'How to Play?',
@@ -2221,8 +2243,7 @@
       'howto.tip': 'Tip',
       'howto.move': 'Move',
       'howto.jump': 'Jump',
-      'howto.talk': 'Talk to guide NPC',
-      'howto.attack': 'Energy shot',
+      'howto.attack': 'Energy attack',
       'howto.dash': 'Dash (speed burst)',
       'howto.talk': 'Talk / Interact with guides',
       'howto.pause': 'Pause',
@@ -2267,10 +2288,6 @@
       'toast.hurt': 'You took damage!',
       'toast.fall': 'You fell! Restarting…',
       'toast.level_up': '✦ Leveled up!',
-      'toast.difficulty': 'Difficulty: {level}',
-      'difficulty.easy': 'Explorer',
-      'difficulty.normal': 'Adventurer',
-      'difficulty.hard': 'Master Explorer',
       'toast.book': 'Book collected',
       'toast.rune': 'Rune collected',
       'toast.gem': 'Gem collected',
@@ -2327,25 +2344,9 @@
       'npc.kivilcim.name': 'Kivilcim',
       'npc.kivilcim.role': 'Combat Guide · Energy',
       'npc.kivilcim.d1': '🔥 You made it this far, amazing! I am Kivilcim, your combat guide. You\'ll face the Shadow of Ignorance soon.',
-      'npc.kivilcim.d2': '⚔️ Fire tip: F (or mouse click) sends an energy shot. 0.35s cooldown — rapid but controlled.',
+      'npc.kivilcim.d2': '⚔️ Attack tip: J (or mouse click) sends an energy shot. 0.35s cooldown — rapid but controlled.',
       'npc.kivilcim.d3': '👾 Boss has two attacks: triple energy orbs and a close-range slam. When slam comes, dash away!',
       'npc.kivilcim.d4': 'Defeating the boss reveals the Wisdom Stone. Touch it to illuminate the library! ✨ Ready when you are.',
-
-      'npc.minti.name': 'Minti',
-      'npc.minti.role': 'Knowledge Guide · Research',
-      'npc.minti.short': 'Compare clues, read prompts, and find the right path yourself! 🔎',
-      'npc.minti.d1': '🔎 I am Minti. In the research corridor, speed alone is not enough; you must choose the right information too.',
-      'npc.minti.d2': 'Some enemies move, others fire from range. Watch their pattern first, then advance.',
-      'npc.minti.d3': 'As you level up, the game grows harsher: enemies speed up and new types appear.',
-      'npc.minti.d4': 'If you get boxed in between shelves, check the mini-map and stay calm. Every section has a solution.',
-
-      'npc.boncuk.name': 'Boncuk',
-      'npc.boncuk.role': 'Verification Guide · Strategy',
-      'npc.boncuk.short': 'Not everything that glows is safe; watch for traps and shadow shots! 🧠',
-      'npc.boncuk.d1': '🧠 I am Boncuk. Here, strategy matters as much as reflex.',
-      'npc.boncuk.d2': 'Sentinel enemies are durable. Create space first, then fire in control.',
-      'npc.boncuk.d3': 'Wisp enemies are fast; use dash to break their line and reposition.',
-      'npc.boncuk.d4': 'Recover your HP and shield before the gate. The final corridor is always the toughest.'
 
       // In-game prompts
       'dlg.welcome_short': 'Welcome! Your adventure begins — collect runes, finish quests and illuminate the library!',
@@ -2421,7 +2422,8 @@
     document.querySelectorAll('.lang-btn').forEach(b => {
       b.classList.toggle('active', b.getAttribute('data-lang') === lang);
     });
-    applyI18n();
+    hardenInteractiveButtons();
+  applyI18n();
   }
 
   // lang toggle button bindings (set up immediately since buttons already exist in DOM)
@@ -2623,22 +2625,14 @@
     world.pickups.push({x,y,w:26,h:26,type,value,collected:false,bob:Math.random()*Math.PI*2});
   }
   function addEnemy(x,y,type='crawler'){
-    const map = {
-      crawler:{w:42,h:42,vx:60,hp:3,patrol:140},
-      shade:{w:42,h:42,vx:90,hp:3,patrol:140},
-      bossling:{w:42,h:42,vx:70,hp:4,patrol:160},
-      wisp:{w:34,h:34,vx:130,hp:2,patrol:120},
-      sentinel:{w:46,h:56,vx:35,hp:6,patrol:90}
-    }[type] || {w:42,h:42,vx:60,hp:3,patrol:140};
     world.enemies.push({
-      x,y,w:map.w,h:map.h,type,
-      vx: map.vx,
+      x,y,w:42,h:42,type,
+      vx: type==='shade' ? 90 : 60,
       vy:0, dir: Math.random()>0.5?1:-1,
-      hp: map.hp,
-      maxHp: map.hp,
+      hp: type==='bossling'?4:3,
+      maxHp: type==='bossling'?4:3,
       hitCd:0,
-      patrol:[x-map.patrol, x+map.patrol],
-      bob: Math.random()*Math.PI*2,
+      patrol:[x-140, x+140],
       dead:false
     });
   }
@@ -2684,8 +2678,6 @@
     game.finalActivated = false;
     game.books = 0; game.runes = 0; game.gems = 0; game.keys = 0; game.stars = 0;
     game.totalTasksDone = 0;
-    game.difficultyTier = 1;
-    game.difficultyName = 'Keşif';
 
     player.x = 120; player.y = 220;
     player.vx = 0; player.vy = 0;
@@ -2738,21 +2730,16 @@
 
     // enemies
     addEnemy(1020, 460, 'crawler');
-    addEnemy(1360, 278, 'wisp');
     addEnemy(1890, 478, 'crawler');
     addEnemy(2280, 450, 'shade');
     addEnemy(3180, 478, 'bossling');
-    addEnemy(3520, 478, 'sentinel');
     addEnemy(3900, 478, 'shade');
-    addEnemy(4380, 218, 'wisp');
     addEnemy(4680, 478, 'crawler');
 
     // NPCs (pastel tints per character) — dialogKey looks up full multi-turn dialogue set
     addNPC(260,  448, 'kutubot',  '📚', '#a7e7b8', 'talk-start');
     addNPC(1830, 448, 'yaprak',   '🍃', '#c8f1d4');
-    addNPC(2480, 366, 'minti',    '🔎', '#fff1c9');
     addNPC(3000, 448, 'zipzip',   '⚡', '#bde4ff');
-    addNPC(4180, 198, 'boncuk',   '🧠', '#e6d6ff');
     addNPC(4600, 448, 'kivilcim', '🔥', '#ffc7d8');
 
     // gate & hazards
@@ -2772,7 +2759,6 @@
     // final stone
     addFinalStone(5290, 428);
 
-    updateDifficultyState(true);
     renderTasks();
     buildTeamCards();
     setDialogue(t('npc.kutubot.name'), '📚', t('dlg.welcome_short'), '#a7e7b8');
@@ -2827,7 +2813,7 @@
         document.querySelectorAll('.team-card').forEach(n=>n.classList.remove('active'));
         div.classList.add('active');
         setDialogue(c.name, c.emoji, t('dlg.char_role_tip', { role: t(c.roleKey), tip: t(c.tipKey) }), c.tint);
-        showToast(t('toast.npc_talk', { name: c.name }));
+        showToast(t('toast.char_selected', { name: c.name }));
         playClick();
       });
       wrap.appendChild(div);
@@ -2880,7 +2866,7 @@
   /* =====================================================================
      INPUT — keyboard + touch D-pad cross + action buttons
      ===================================================================== */
-  const touchState = { moveX:0, moveY:0, jump:false, attack:false, dash:false, talk:false };
+  const touchState = { moveX:0, moveY:0, jump:false, attack:false, dash:false };
 
   function bindDpadButton(el, dir){
     if(!el) return;
@@ -2909,7 +2895,6 @@
   const btnJump = document.getElementById('btnJump');
   const btnAttack = document.getElementById('btnAttack');
   const btnDash = document.getElementById('btnDash');
-  const btnTalk = document.getElementById('btnTalk');
   function bindActionPress(el, key){
     if(!el) return;
     const handler = (e)=>{ if(e) e.preventDefault(); pressTouch(key); playClick(); };
@@ -2918,16 +2903,15 @@
   bindActionPress(btnJump, 'jump');
   bindActionPress(btnAttack, 'attack');
   bindActionPress(btnDash, 'dash');
-  bindActionPress(btnTalk, 'talk');
 
   window.addEventListener('keydown', (e)=>{
     keys[e.key.toLowerCase()] = true;
-    if(['ArrowLeft','ArrowRight','ArrowUp',' ','Escape','e','E','f','F'].includes(e.key)) e.preventDefault();
+    if(['ArrowLeft','ArrowRight','ArrowUp',' ','Escape'].includes(e.key)) e.preventDefault();
     if(e.key === 'Escape' && gameRunning) togglePause();
   }, { passive:false });
   window.addEventListener('keyup', (e)=>{ keys[e.key.toLowerCase()] = false; });
   function resetInputs(){
-    touchState.moveX = 0; touchState.moveY = 0; touchState.jump = false; touchState.attack = false; touchState.dash = false; touchState.talk = false;
+    touchState.moveX = 0; touchState.moveY = 0; touchState.jump = false; touchState.attack = false; touchState.dash = false;
     Object.keys(keys).forEach(k=>keys[k]=false);
     document.querySelectorAll('.dpad-btn').forEach(el=>el.classList.remove('active'));
   }
@@ -2937,9 +2921,8 @@
   const wantsLeft  = ()=> keys['a'] || keys['arrowleft']  || touchState.moveX < -0.25;
   const wantsRight = ()=> keys['d'] || keys['arrowright'] || touchState.moveX >  0.25;
   const wantsJump  = ()=> keys[' '] || keys['arrowup']    || touchState.jump;
-  const wantsAttack= ()=> keys['f'] || keys['j'] || touchState.attack;
+  const wantsAttack= ()=> keys['j'] || touchState.attack;
   const wantsDash  = ()=> keys['k'] || touchState.dash;
-  const wantsTalk  = ()=> keys['e'] || touchState.talk;
 
   /* =====================================================================
      GAMEPLAY
@@ -3008,19 +2991,6 @@
       showToast(t('toast.level_up'), 'success');
       flashScreen(0.18);
       playCollect();
-    }
-  }
-
-
-  function updateDifficultyState(forceToast=false){
-    const prev = game.difficultyTier || 1;
-    let tier = 1;
-    if(game.level >= 5 || player.score >= 2200) tier = 3;
-    else if(game.level >= 3 || player.score >= 900) tier = 2;
-    game.difficultyTier = tier;
-    game.difficultyName = tier===1 ? t('difficulty.easy') : tier===2 ? t('difficulty.normal') : t('difficulty.hard');
-    if(forceToast || tier !== prev){
-      showToast(t('toast.difficulty', { level: game.difficultyName }), tier===3 ? 'warn' : 'success');
     }
   }
 
@@ -3182,10 +3152,6 @@
     }
     if(wantsAttack()){ attack(); touchState.attack = false; }
     if(wantsDash()){   dash();   touchState.dash   = false; }
-    if(wantsTalk()){
-      if(activeNearestNpc && !openNpc) openNpcDialog(activeNearestNpc);
-      touchState.talk = false;
-    }
 
     player.attackCd   = Math.max(0, player.attackCd   - dt);
     player.dashCd     = Math.max(0, player.dashCd     - dt);
@@ -3343,51 +3309,22 @@
   }
 
   function updateEnemies(dt){
-    const diffMul = 1 + ((game.difficultyTier || 1) - 1) * 0.18;
     for(const e of world.enemies){
       if(e.dead) continue;
       e.hitCd = Math.max(0, e.hitCd - dt);
-      if(e.type === 'wisp'){
-        e.bob += dt * 4.5;
-        e.x += e.vx * e.dir * dt * diffMul;
-        e.y += Math.sin(e.bob) * 26 * dt;
-      } else if(e.type === 'sentinel'){
-        if(Math.abs(player.x - e.x) > 170){
-          e.x += e.vx * e.dir * dt * 0.55 * diffMul;
-        }
-      } else {
-        e.x += e.vx * e.dir * dt * diffMul;
-      }
+      e.x += e.vx * e.dir * dt;
       if(e.x < e.patrol[0]) e.dir = 1;
       if(e.x > e.patrol[1]) e.dir = -1;
-      if(rectsOverlap(player, e)) hurtPlayer(e.type==='sentinel'?14:10, e.x);
+      if(rectsOverlap(player, e)) hurtPlayer(10, e.x);
 
       if(e.type === 'shade'){
-        if(Math.abs(player.x - e.x) < 260 && Math.random() < 0.008 * diffMul){
+        if(Math.abs(player.x - e.x) < 260 && Math.random() < 0.008){
           const d = Math.sign((player.x - e.x) || 1);
           world.enemyProjectiles.push({
             x:e.x+e.w/2, y:e.y+14, w:18, h:18,
-            vx:d*260*diffMul, vy:0, life:2, damage:10
+            vx:d*260, vy:0, life:2, damage:10
           });
           spawnParticle(e.x+e.w/2, e.y+e.h/2, '#b89cff', 8, 120);
-        }
-      } else if(e.type === 'wisp'){
-        if(Math.abs(player.x - e.x) < 220 && Math.random() < 0.014 * diffMul){
-          const d = Math.sign((player.x - e.x) || 1);
-          world.enemyProjectiles.push({
-            x:e.x+e.w/2, y:e.y+10, w:14, h:14,
-            vx:d*320*diffMul, vy:Math.sin(e.bob)*55, life:1.5, damage:8
-          });
-          spawnParticle(e.x+e.w/2, e.y+e.h/2, '#7cc7ff', 6, 110);
-        }
-      } else if(e.type === 'sentinel'){
-        if(Math.abs(player.x - e.x) < 300 && Math.random() < 0.01 * diffMul){
-          const d = Math.sign((player.x - e.x) || 1);
-          world.enemyProjectiles.push({
-            x:e.x+e.w/2, y:e.y+18, w:20, h:20,
-            vx:d*210*diffMul, vy:0, life:2.2, damage:12
-          });
-          spawnParticle(e.x+e.w/2, e.y+e.h/2, '#ffd2a8', 7, 90);
         }
       }
     }
@@ -3397,21 +3334,20 @@
     const b = world.boss;
     if(!b || !b.active || b.dead) return;
     b.hitCd = Math.max(0, b.hitCd - dt);
-    const diffMul = 1 + ((game.difficultyTier || 1) - 1) * 0.18;
     b.shootCd -= dt;
     b.slamCd -= dt;
     const dx = player.x - b.x;
     b.dir = dx >= 0 ? 1 : -1;
-    b.vx = Math.abs(dx) > 120 ? b.dir * (120 * diffMul) : 0;
+    b.vx = Math.abs(dx) > 120 ? b.dir * 120 : 0;
     b.x += b.vx * dt;
 
     if(b.shootCd <= 0){
-      b.shootCd = Math.max(0.8, 1.5 + Math.random()*0.8 - (game.difficultyTier-1)*0.18);
+      b.shootCd = 1.5 + Math.random()*0.8;
       for(let i=-1;i<=1;i++){
         world.enemyProjectiles.push({
           x:b.x+b.w/2, y:b.y+40,
           w:20, h:20,
-          vx:(b.dir*280*diffMul) + i*30,
+          vx:(b.dir*280) + i*30,
           vy:i*28, life:2.4, damage:12
         });
       }
@@ -3420,11 +3356,11 @@
     }
     if(b.slamCd <= 0 && Math.abs(dx) < 180){
       b.slamCd = 3.2;
-      hurtPlayer(16 + (game.difficultyTier-1)*2, b.x);
+      hurtPlayer(16, b.x);
       flashScreen(0.2);
       spawnParticle(player.x+player.w/2, player.y+player.h/2, '#ffffff', 22, 260);
     }
-    if(rectsOverlap(player, b)) hurtPlayer(14 + (game.difficultyTier-1)*2, b.x);
+    if(rectsOverlap(player, b)) hurtPlayer(14, b.x);
   }
 
   function updateParticles(dt){
@@ -3654,7 +3590,7 @@
     if(e.dead) return;
     const x = e.x - cameraX, y = e.y;
     drawGlow(x+e.w/2, y+e.h/2, 32,
-      e.type==='shade' ? 'rgba(184,156,255,.22)' : e.type==='wisp' ? 'rgba(124,199,255,.24)' : e.type==='sentinel' ? 'rgba(255,210,168,.22)' : 'rgba(255,143,176,.20)');
+      e.type==='shade' ? 'rgba(184,156,255,.22)' : 'rgba(255,143,176,.20)');
 
     if(e.type === 'crawler' || e.type === 'bossling'){
       const col = e.hitCd>0 ? '#ffffff' :
@@ -3673,31 +3609,6 @@
       ctx.beginPath();
       ctx.arc(x+e.w/2, y+32, 5, Math.PI*1.15, Math.PI*1.85);
       ctx.stroke();
-    } else if(e.type === 'wisp'){
-      ctx.fillStyle = e.hitCd>0 ? '#fff' : '#7cc7ff';
-      ctx.beginPath();
-      for(let i=0;i<5;i++){
-        const a = -Math.PI/2 + i*Math.PI*2/5;
-        const ox = x+e.w/2 + Math.cos(a)*14;
-        const oy = y+e.h/2 + Math.sin(a)*14;
-        i===0 ? ctx.moveTo(ox,oy) : ctx.lineTo(ox,oy);
-        const ia = a + Math.PI/5;
-        ctx.lineTo(x+e.w/2 + Math.cos(ia)*6, y+e.h/2 + Math.sin(ia)*6);
-      }
-      ctx.closePath(); ctx.fill();
-      ctx.fillStyle = '#203040';
-      ctx.beginPath(); ctx.arc(x+e.w/2-4, y+e.h/2, 2.2, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+e.w/2+4, y+e.h/2, 2.2, 0, Math.PI*2); ctx.fill();
-    } else if(e.type === 'sentinel'){
-      const grad = ctx.createLinearGradient(0, y, 0, y+e.h);
-      grad.addColorStop(0, e.hitCd>0 ? '#fff' : '#ffe7c9');
-      grad.addColorStop(1, '#ffb072');
-      ctx.fillStyle = grad;
-      roundRect(ctx, x, y, e.w, e.h, 12, true, false);
-      ctx.fillStyle = '#2c3441';
-      ctx.fillRect(x+10, y+14, 8, 8);
-      ctx.fillRect(x+28, y+14, 8, 8);
-      ctx.fillRect(x+14, y+34, 18, 5);
     } else {
       // shade diamond
       ctx.fillStyle = e.hitCd>0 ? '#fff' : '#b89cff';
@@ -4143,12 +4054,20 @@
   function bind(id, fn, evt='click'){
     const el = document.getElementById(id);
     if(!el) return;
-    const handler = (e)=>{ if(e && e.type && e.type.startsWith('touch')) e.preventDefault(); playClick(); fn(e); };
-    el.addEventListener(evt, handler, { passive:false });
-    if(evt === 'click'){
-      el.addEventListener('touchend', handler, { passive:false });
-      el.addEventListener('pointerup', handler, { passive:false });
-    }
+    let lastTrigger = 0;
+    const handler = (e)=>{
+      const now = Date.now();
+      if(now - lastTrigger < 180) return;
+      lastTrigger = now;
+      if(e){
+        if(e.cancelable) e.preventDefault();
+        if(typeof e.stopPropagation === 'function') e.stopPropagation();
+      }
+      playClick();
+      fn(e);
+    };
+    const events = evt === 'click' ? ['click','pointerup','touchend'] : [evt];
+    events.forEach(name=>el.addEventListener(name, handler, { passive:false }));
   }
 
   bind('startGameBtn', startGame);
@@ -4240,6 +4159,18 @@
     document.getElementById('miniMapCard').classList.toggle('show');
   });
 
+
+  function hardenInteractiveButtons(){
+    document.querySelectorAll('button, .btn-pill, .round-btn, .action-circle, .dpad-btn, .menu-close, .lang-btn, .team-card, .tasks-head').forEach(el=>{
+      el.style.pointerEvents = 'auto';
+      el.style.touchAction = 'manipulation';
+      if(!/^(button|a|input)$/i.test(el.tagName)){
+        el.setAttribute('tabindex', el.getAttribute('tabindex') || '0');
+        if(!el.getAttribute('role')) el.setAttribute('role','button');
+      }
+    });
+  }
+
   /* =====================================================================
      INITIAL
      ===================================================================== */
@@ -4253,6 +4184,490 @@
     window.addEventListener(evt, ()=>ensureAudio(), { once:true });
   });
   </script>
+
+
+<script>
+(()=>{
+  const style = document.createElement('style');
+  style.textContent = `
+    .chapter-chip{position:fixed;left:50%;top:78px;transform:translateX(-50%);z-index:18;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border:2px solid rgba(90,106,127,.18);border-radius:999px;box-shadow:0 8px 24px rgba(44,52,65,.12);padding:10px 18px;display:flex;align-items:center;gap:10px;pointer-events:none}
+    .chapter-chip .dot{width:14px;height:14px;border-radius:50%;background:linear-gradient(180deg,#ffe28a,#ffc541);box-shadow:0 0 0 4px rgba(255,226,138,.25)}
+    .chapter-chip .txt{display:flex;flex-direction:column;line-height:1}
+    .chapter-chip .txt b{font:900 12px/1 'Nunito',sans-serif;letter-spacing:.14em;color:#5a6a7f;text-transform:uppercase}
+    .chapter-chip .txt span{font:800 14px/1.15 'Nunito',sans-serif;color:#2c3441;margin-top:3px}
+    .chapter-chip .badge{padding:5px 9px;border-radius:999px;background:linear-gradient(180deg,#ffd6df,#ff9ab2);border:1px solid rgba(232,115,154,.55);font:900 10px/1 'Nunito',sans-serif;color:#661a34;letter-spacing:.12em;text-transform:uppercase}
+    .story-pop{position:fixed;left:50%;bottom:128px;transform:translateX(-50%);z-index:19;background:rgba(44,52,65,.88);color:#fff;padding:12px 16px;border-radius:18px;box-shadow:0 14px 34px rgba(17,24,39,.25);font:800 13px/1.35 'Nunito',sans-serif;opacity:0;pointer-events:none;transition:opacity .22s ease, transform .22s ease;max-width:min(520px,calc(100vw - 32px));text-align:center}
+    .story-pop.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+    .kiosk-hint{position:fixed;right:18px;bottom:132px;z-index:18;background:rgba(255,255,255,.88);border:2px solid rgba(90,106,127,.14);border-radius:18px;padding:10px 12px;box-shadow:0 10px 20px rgba(44,52,65,.10);font:800 11px/1.35 'Nunito',sans-serif;color:#5a6a7f;max-width:220px}
+    .kiosk-hint b{display:block;color:#2c3441;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+    .power-pulse{animation:powerPulse 1.5s ease-in-out infinite}
+    @keyframes powerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+    @media (max-width: 900px){.chapter-chip{top:118px}.kiosk-hint{left:14px;right:14px;bottom:118px;max-width:none;text-align:center}}
+  `;
+  document.head.appendChild(style);
+
+  const chapterChip = document.createElement('div');
+  chapterChip.className = 'chapter-chip';
+  chapterChip.innerHTML = `<div class="dot"></div><div class="txt"><b>Bölüm</b><span id="chapterChipText">Sessiz Başlangıç</span></div><div class="badge" id="difficultyBadge">NORMAL</div>`;
+  document.body.appendChild(chapterChip);
+
+  const storyPop = document.createElement('div');
+  storyPop.className = 'story-pop';
+  document.body.appendChild(storyPop);
+
+  const kioskHint = document.createElement('div');
+  kioskHint.className = 'kiosk-hint';
+  kioskHint.innerHTML = `<b>Kiosk Kontrol</b>WASD / Yön tuşları ile ilerle, <strong>F</strong> ile enerji atışı yap, boşluk ile zıpla.`;
+  document.body.appendChild(kioskHint);
+
+  const originalAddEnemy = addEnemy;
+  addEnemy = function(x,y,type='crawler'){
+    originalAddEnemy(x,y,type);
+    const e = world.enemies[world.enemies.length-1];
+    if(!e) return;
+    if(type === 'shade'){ e.vx = 84; e.hp = e.maxHp = 4; }
+    if(type === 'bossling'){ e.vx = 78; e.hp = e.maxHp = 6; }
+  };
+
+  const storyState = {
+    chapter:'Sessiz Başlangıç',
+    difficulty:'Normal',
+    step:-1,
+    messages:[
+      { x:120,  text:'Kütüphane Macerası başladı. Pırpır seni ilk raflara yönlendiriyor.' },
+      { x:900,  text:'Bilgi koridorları hareketleniyor. Gölge yaratıklar artık daha saldırgan.' },
+      { x:1800, text:'Minti bulmaca enerjisini açtı. Rün parçaları güçleniyor.' },
+      { x:2850, text:'Tıkır gizli raf geçidini işaret etti. Düşman düzenleri karmaşıklaşıyor.' },
+      { x:3950, text:'Boncuk yanlış bilgiyi ayıklıyor. Son anahtar bölgesine girdin.' },
+      { x:4850, text:'Cehalet Gölgesi uyanıyor. Büyülü salona hazırlan.' }
+    ]
+  };
+
+  function showStory(text){
+    storyPop.textContent = text;
+    storyPop.classList.add('show');
+    clearTimeout(showStory._t);
+    showStory._t = setTimeout(()=>storyPop.classList.remove('show'), 3000);
+  }
+
+  function zoneProfile(){
+    const x = player.x;
+    if(x < 900) return { chapter:'Sessiz Başlangıç', difficulty:'Kolay', mult:0.95, tint:'#6ecf89' };
+    if(x < 1900) return { chapter:'Fısıldayan Raflar', difficulty:'Normal', mult:1.05, tint:'#7cc7ff' };
+    if(x < 3000) return { chapter:'Rün Koridoru', difficulty:'Zor', mult:1.18, tint:'#b89cff' };
+    if(x < 4200) return { chapter:'Kayıp Anahtar Holü', difficulty:'Usta', mult:1.28, tint:'#ffb072' };
+    return { chapter:'Cehalet Salonu', difficulty:'Boss', mult:1.42, tint:'#ff8fb0' };
+  }
+
+  const originalBuildWorld = buildWorld;
+  buildWorld = function(){
+    originalBuildWorld();
+
+    game.chapterIndex = 1;
+    game.combo = 0;
+    game.storyBossWarned = false;
+    player.weaponLevel = 1;
+    player.attackPower = 1;
+    player.attackCdBase = 0.35;
+    player.regenTick = 0;
+    player.auraNpc = '';
+    player.bonusJump = 0;
+
+    world.platforms.push(
+      {x:640,y:430,w:110,h:18,type:'shelf'},
+      {x:1960,y:402,w:110,h:18,type:'shelf'},
+      {x:3480,y:318,w:130,h:18,type:'shelf'},
+      {x:4380,y:196,w:120,h:18,type:'shelf'}
+    );
+
+    world.pickups.push(
+      {x:690,y:385,w:26,h:26,type:'gem',value:1,bob:1.2,collected:false},
+      {x:2015,y:356,w:26,h:26,type:'book',value:1,bob:2.6,collected:false},
+      {x:3535,y:272,w:26,h:26,type:'rune',value:1,bob:1.4,collected:false},
+      {x:4430,y:150,w:26,h:26,type:'book',value:1,bob:3.2,collected:false}
+    );
+
+    world.enemies.push(
+      {x:760,y:472,w:42,h:42,type:'hopper',vx:86,vy:0,dir:1,hp:4,maxHp:4,hitCd:0,patrol:[710,960],dead:false,jumpCd:1.1},
+      {x:2050,y:450,w:44,h:44,type:'sentinel',vx:0,vy:0,dir:-1,hp:5,maxHp:5,hitCd:0,patrol:[1980,2260],dead:false,shootCd:1.6},
+      {x:3380,y:470,w:46,h:46,type:'blink',vx:130,vy:0,dir:1,hp:5,maxHp:5,hitCd:0,patrol:[3270,3560],dead:false,blinkCd:1.5},
+      {x:4460,y:214,w:42,h:42,type:'hopper',vx:92,vy:0,dir:-1,hp:6,maxHp:6,hitCd:0,patrol:[4340,4560],dead:false,jumpCd:0.85}
+    );
+
+    world.npc.push(
+      {x:620,y:448,w:52,h:72,dialogKey:'pirpir',emoji:'📖',tint:'#c8f1d4',taskId:null,name:'PIRPIR',role:'Okuma Rehberi',shortText:'Kitapları topla, ritmi yakala!',triggered:false,talkedFull:false},
+      {x:2260,y:418,w:52,h:72,dialogKey:'minti',emoji:'💡',tint:'#ffe3cc',taskId:null,name:'MINTI',role:'Soru Ustası',shortText:'Her soru sana güç kazandırır.',triggered:false,talkedFull:false},
+      {x:3520,y:448,w:52,h:72,dialogKey:'tikir',emoji:'🧭',tint:'#bde4ff',taskId:null,name:'TIKIR',role:'Raf Kâşifi',shortText:'Gizli raflar bazen yukarıdadır.',triggered:false,talkedFull:false},
+      {x:4720,y:448,w:52,h:72,dialogKey:'boncuk',emoji:'🕵️',tint:'#e6d6ff',taskId:null,name:'BONCUK',role:'Bilgi Dedektifi',shortText:'Yanlış bilgi gölgeye dönüşür.',triggered:false,talkedFull:false}
+    );
+
+    if(world.boss){
+      world.boss.maxHp = 42;
+      world.boss.hp = 42;
+      world.boss.phase = 1;
+    }
+
+    setDialogue('PIRPIR','📖','İlk raflardan kitapları topla; F ile enerji atışı yapmayı unutma.','#c8f1d4');
+    showStory('Kütüphane Macerası seni bilgiyle dolu bir yolculuğa çağırıyor.');
+  };
+
+  const originalAttack = attack;
+  attack = function(){
+    if(player.attackCd > 0) return;
+    const zone = zoneProfile();
+    const spreadCount = game.level >= 5 ? 2 : 1;
+    player.attackCd = Math.max(0.18, (player.attackCdBase || 0.35) - Math.min(0.12, game.level*0.01));
+    playAttack();
+    for(let i=0;i<spreadCount;i++){
+      const offset = spreadCount===2 ? (i===0?-8:8) : 0;
+      world.projectiles.push({
+        x: player.x + player.w/2 + player.facing*30,
+        y: player.y + player.h/2 - 10 + offset,
+        w:20, h:12,
+        vx: player.facing * (660 + game.level*16),
+        life:1.0 + game.level*0.02,
+        damage:(game.level >= 4 ? 2 : 1),
+        tint: zone.tint,
+        type:'player'
+      });
+    }
+    if(game.level >= 8){
+      world.projectiles.push({
+        x: player.x + player.w/2 + player.facing*30,
+        y: player.y + player.h/2 - 10,
+        w:22, h:14,
+        vx: player.facing * (540 + game.level*20),
+        vy:-42,
+        life:0.85,
+        damage:2,
+        tint:'#ffffff',
+        type:'player'
+      });
+    }
+    spawnParticle(player.x+player.w/2+player.facing*28, player.y+player.h/2, zone.tint, 10 + Math.min(game.level,8), 140 + game.level*8);
+  };
+
+  const originalGrantXp = grantXp;
+  grantXp = function(v){
+    const before = game.level;
+    originalGrantXp(v);
+    if(game.level > before){
+      player.weaponLevel = 1 + Math.floor(game.level / 3);
+      player.attackPower = 1 + Math.floor(game.level / 4);
+      player.speed = 320 + Math.min(60, game.level * 4);
+      player.jump = 760 + Math.min(80, game.level * 6);
+      setDialogue('YÜKSELİŞ','✨',`Seviye ${game.level}! Enerji atışların güçlendi.`, '#ffe28a');
+    }
+  };
+
+  const originalCollect = collect;
+  collect = function(p){
+    originalCollect(p);
+    if(p.type === 'book' && game.books % 3 === 0){
+      player.hp = Math.min(player.maxHp, player.hp + 6);
+    }
+    if(p.type === 'gem'){
+      player.shieldTime = Math.max(player.shieldTime, 1.2);
+    }
+  };
+
+  const originalUpdatePlayer = updatePlayer;
+  updatePlayer = function(dt){
+    originalUpdatePlayer(dt);
+
+    const zone = zoneProfile();
+    chapterChip.querySelector('#chapterChipText').textContent = zone.chapter;
+    chapterChip.querySelector('#difficultyBadge').textContent = zone.difficulty;
+    chapterChip.querySelector('.dot').style.background = `linear-gradient(180deg, ${zone.tint}, #ffffff)`;
+
+    storyState.messages.forEach((m, idx)=>{
+      if(player.x >= m.x && storyState.step < idx){
+        storyState.step = idx;
+        showStory(m.text);
+      }
+    });
+
+    player.regenTick = (player.regenTick || 0) + dt;
+    player.auraNpc = '';
+    player.bonusJump = 0;
+
+    for(const npc of world.npc){
+      const near = Math.abs((npc.x+npc.w/2)-(player.x+player.w/2)) < 120 && Math.abs(npc.y-player.y) < 90;
+      if(!near) continue;
+      if(npc.dialogKey === 'pirpir'){
+        player.auraNpc = 'pirpir';
+        if(player.regenTick > 1.2){ player.hp = Math.min(player.maxHp, player.hp + 1); player.regenTick = 0; }
+      }
+      if(npc.dialogKey === 'minti'){
+        player.auraNpc = 'minti';
+        player.shieldTime = Math.max(player.shieldTime, 0.18);
+      }
+      if(npc.dialogKey === 'tikir'){
+        player.auraNpc = 'tikir';
+        player.bonusJump = 55;
+      }
+      if(npc.dialogKey === 'boncuk'){
+        player.auraNpc = 'boncuk';
+        if(game.keys === 0 && player.x > 4300) setDialogue('BONCUK','🕵️','Anahtar üst raflarda değil, sessiz zeminin devamında saklı.','#e6d6ff');
+      }
+    }
+
+    if(player.bonusJump > 0) player.jump = 760 + Math.min(80, game.level * 6) + player.bonusJump;
+    else player.jump = 760 + Math.min(80, game.level * 6);
+
+    if(player.x > 4700 && !game.storyBossWarned){
+      game.storyBossWarned = true;
+      setDialogue('KIVILCIM','🔥','Son salon açıldı. Cehalet Gölgesi yaklaşırken F atışlarını seri kullan!','#ffc7d8');
+      showStory('Büyük salonun kapıları açılıyor. Son savaş başlamak üzere.');
+    }
+  };
+
+  const originalUpdateEnemies = updateEnemies;
+  updateEnemies = function(dt){
+    originalUpdateEnemies(dt);
+    const zone = zoneProfile();
+    for(const e of world.enemies){
+      if(e.dead) continue;
+      if(e.type === 'hopper'){
+        e.jumpCd -= dt;
+        e.x += e.vx * e.dir * dt * zone.mult;
+        if(e.x < e.patrol[0]) e.dir = 1;
+        if(e.x > e.patrol[1]) e.dir = -1;
+        if(e.jumpCd <= 0){ e.jumpCd = 0.9 + Math.random()*0.45; e.vy = -340; }
+        e.vy = (e.vy || 0) + 1100 * dt;
+        e.y += e.vy * dt;
+        const floorY = 478;
+        if(e.y > floorY){ e.y = floorY; e.vy = 0; }
+        if(rectsOverlap(player,e)) hurtPlayer(12, e.x);
+      } else if(e.type === 'blink'){
+        e.blinkCd -= dt;
+        e.x += e.vx * e.dir * dt * zone.mult;
+        if(e.x < e.patrol[0]) e.dir = 1;
+        if(e.x > e.patrol[1]) e.dir = -1;
+        if(e.blinkCd <= 0){
+          e.blinkCd = 1.25 + Math.random()*0.7;
+          e.x += e.dir * (80 + Math.random()*60);
+          spawnParticle(e.x+e.w/2, e.y+e.h/2, '#b89cff', 12, 150);
+        }
+        if(rectsOverlap(player,e)) hurtPlayer(14, e.x);
+      } else if(e.type === 'sentinel'){
+        e.shootCd -= dt;
+        if(Math.abs(player.x-e.x) < 340 && e.shootCd <= 0){
+          e.shootCd = 1.2;
+          const d = Math.sign((player.x - e.x) || 1);
+          world.enemyProjectiles.push({x:e.x+e.w/2,y:e.y+16,w:20,h:20,vx:d*320,vy:0,life:2.2,damage:14});
+          spawnParticle(e.x+e.w/2,e.y+e.h/2,'#ffb072',10,130);
+        }
+        if(rectsOverlap(player,e)) hurtPlayer(10, e.x);
+      }
+    }
+  };
+
+  const originalUpdateBoss = updateBoss;
+  updateBoss = function(dt){
+    originalUpdateBoss(dt);
+    const b = world.boss;
+    if(!b || !b.active || b.dead) return;
+    if(b.hp <= b.maxHp * 0.55 && b.phase === 1){
+      b.phase = 2;
+      b.shootCd = 0.8;
+      showStory('Cehalet Gölgesi ikinci faza geçti. Saldırılar hızlandı!');
+      setDialogue('BONCUK','🕵️','Zayıf anında seri enerji atışı gönder!','#e6d6ff');
+    }
+    if(b.phase >= 2){
+      b.vx *= 1.12;
+      if(Math.random() < 0.015){
+        world.enemyProjectiles.push({x:b.x+b.w/2,y:b.y+54,w:24,h:24,vx:b.dir*360,vy:(Math.random()-0.5)*90,life:2.1,damage:14});
+      }
+    }
+  };
+
+  const originalUpdateProjectiles = updateProjectiles;
+  updateProjectiles = function(dt){
+    world.projectiles = world.projectiles.filter(p=>{
+      p.x += (p.vx || 0) * dt;
+      p.y += (p.vy || 0) * dt;
+      p.life -= dt;
+      if(p.life <= 0) return false;
+      for(const e of world.enemies){
+        if(!e.dead && rectsOverlap({x:p.x,y:p.y,w:p.w,h:p.h}, e)){
+          const dmg = p.damage || 1;
+          e.hp -= dmg;
+          e.hitCd = 0.18;
+          spawnParticle(p.x,p.y,p.tint || '#ffc541',10 + dmg*2,140);
+          if(e.hp <= 0){
+            e.dead = true;
+            player.score += 260;
+            game.combo = (game.combo || 0) + 1;
+            grantXp(14 + dmg*4);
+            spawnParticle(e.x+e.w/2,e.y+e.h/2,'#6ecf89',18,220);
+            if(game.combo % 3 === 0) showToast('Kombin! ' + game.combo, 'success');
+          }
+          return false;
+        }
+      }
+      if(world.boss && world.boss.active && !world.boss.dead && rectsOverlap({x:p.x,y:p.y,w:p.w,h:p.h}, world.boss)){
+        const dmg = p.damage || 1;
+        world.boss.hp -= dmg;
+        world.boss.hitCd = 0.18;
+        spawnParticle(p.x,p.y,p.tint || '#ffc541',12 + dmg*2,160);
+        if(world.boss.hp <= 0){
+          world.boss.dead = true;
+          game.bossDefeated = true;
+          taskDone('defeat-boss');
+          player.score += 3000;
+          grantXp(80);
+          showStory('Cehalet Gölgesi dağıldı. Hikmet Taşı yeniden parlıyor.');
+        }
+        return false;
+      }
+      return true;
+    });
+
+    world.enemyProjectiles = world.enemyProjectiles.filter(p=>{
+      p.x += (p.vx || 0) * dt;
+      p.y += (p.vy || 0) * dt;
+      p.life -= dt;
+      if(p.life <= 0) return false;
+      if(rectsOverlap({x:p.x,y:p.y,w:p.w,h:p.h}, player)){
+        hurtPlayer(p.damage || 10, p.x);
+        spawnParticle(p.x,p.y,'#ff8fb0',10,140);
+        return false;
+      }
+      return true;
+    });
+  };
+
+  const originalDrawEnemy = drawEnemy;
+  drawEnemy = function(e){
+    if(e.type === 'hopper' || e.type === 'blink' || e.type === 'sentinel'){
+      if(e.dead) return;
+      const x = e.x - cameraX, y = e.y;
+      drawGlow(x+e.w/2, y+e.h/2, 34, e.type==='blink' ? 'rgba(184,156,255,.24)' : e.type==='sentinel' ? 'rgba(255,176,114,.24)' : 'rgba(110,207,137,.24)');
+      if(e.type === 'hopper'){
+        const grad = ctx.createLinearGradient(0,y,0,y+e.h);
+        grad.addColorStop(0,'#dffff0'); grad.addColorStop(1,'#6ecf89');
+        ctx.fillStyle = e.hitCd>0 ? '#fff' : grad;
+        ctx.beginPath(); ctx.ellipse(x+e.w/2,y+e.h/2+2,20,17,0,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#2c3441'; ctx.beginPath(); ctx.arc(x+14,y+16,3,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(x+28,y+16,3,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.fillRect(x+10,y+28,22,5);
+      } else if(e.type === 'blink'){
+        ctx.fillStyle = e.hitCd>0 ? '#fff' : '#b89cff';
+        ctx.beginPath();
+        ctx.moveTo(x+e.w/2,y-2); ctx.lineTo(x+e.w+4,y+e.h/2); ctx.lineTo(x+e.w/2,y+e.h+2); ctx.lineTo(x-4,y+e.h/2); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#2c3441'; ctx.fillRect(x+12,y+17,20,4); ctx.fillRect(x+16,y+26,12,4);
+      } else if(e.type === 'sentinel'){
+        const grad = ctx.createLinearGradient(0,y,0,y+e.h);
+        grad.addColorStop(0,'#fff4e6'); grad.addColorStop(1,'#ffb072');
+        ctx.fillStyle = e.hitCd>0 ? '#fff' : grad;
+        roundRect(ctx,x,y,46,46,12,true,false);
+        ctx.fillStyle = '#2c3441'; roundRect(ctx,x+7,y+8,32,14,6,true,false);
+        ctx.fillStyle = '#bde4ff'; ctx.beginPath(); ctx.arc(x+18,y+15,3,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(x+28,y+15,3,0,Math.PI*2); ctx.fill();
+      }
+      ctx.fillStyle = 'rgba(44,52,65,.22)';
+      roundRect(ctx, x-6, y-10, e.w+12, 6, 5, true, false);
+      ctx.fillStyle = e.type==='sentinel' ? '#ffb072' : e.type==='blink' ? '#b89cff' : '#6ecf89';
+      roundRect(ctx, x-6, y-10, (e.hp/e.maxHp)*(e.w+12), 6, 5, true, false);
+      return;
+    }
+    originalDrawEnemy(e);
+  };
+
+  const originalDrawPlayer = drawPlayer;
+  drawPlayer = function(){
+    originalDrawPlayer();
+    const x = player.x - cameraX;
+    const y = player.y;
+    if(player.weaponLevel > 1){
+      ctx.save();
+      ctx.globalAlpha = 0.85;
+      ctx.fillStyle = '#ffe28a';
+      ctx.beginPath(); ctx.arc(x + player.w/2 + player.facing*18, y + 34, 6 + player.weaponLevel, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+    if(player.auraNpc){
+      ctx.save();
+      ctx.strokeStyle = player.auraNpc==='pirpir' ? 'rgba(110,207,137,.65)' : player.auraNpc==='minti' ? 'rgba(255,176,114,.65)' : player.auraNpc==='tikir' ? 'rgba(124,199,255,.65)' : 'rgba(184,156,255,.65)';
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(x+player.w/2, y+player.h/2, 42 + Math.sin(performance.now()*0.008)*4, 0, Math.PI*2); ctx.stroke();
+      ctx.restore();
+    }
+  };
+
+  const originalDrawProjectile = drawProjectile;
+  drawProjectile = function(p, kind='player'){
+    if(kind==='player' && p.tint){
+      const x = p.x - cameraX;
+      drawGlow(x+p.w/2, p.y+p.h/2, 20, p.tint.replace(')',',.22)').replace('rgb','rgba'));
+      ctx.fillStyle = p.tint;
+      roundRect(ctx,x,p.y,p.w,p.h,8,true,false);
+      ctx.fillStyle = 'rgba(255,255,255,.65)';
+      roundRect(ctx,x+2,p.y+2,p.w-6,3,3,true,false);
+      return;
+    }
+    originalDrawProjectile(p, kind);
+  };
+
+  const originalSyncHUD = syncHUD;
+  syncHUD = function(){
+    originalSyncHUD();
+    const xpPct = clamp((player.xp / Math.max(100, game.level * 100)) * 100, 0, 100);
+    const xpEl = document.getElementById('xpBar') || document.getElementById('bar-wisdom');
+    if(document.getElementById('hudLevel')) document.getElementById('hudLevel').textContent = game.level;
+    if(document.getElementById('cnt-stars')) document.getElementById('cnt-stars').textContent = Math.floor(player.score / 8 + (game.combo||0)*12);
+    const attackBtn = document.getElementById('btnAttack');
+    if(attackBtn && !attackBtn.dataset.enhanced){
+      attackBtn.dataset.enhanced = '1';
+      attackBtn.classList.add('power-pulse');
+      attackBtn.innerHTML = '<span class="ico">✨</span><span class="lbl">ATTACK / F</span>';
+    }
+    const jumpBtn = document.getElementById('btnJump');
+    if(jumpBtn && !jumpBtn.dataset.enhanced){
+      jumpBtn.dataset.enhanced = '1';
+      jumpBtn.innerHTML = '<span class="ico">⬆️</span><span class="lbl">JUMP / SPACE</span>';
+    }
+    const dashBtn = document.getElementById('btnDash');
+    if(dashBtn && !dashBtn.dataset.enhanced){
+      dashBtn.dataset.enhanced = '1';
+      dashBtn.innerHTML = '<span class="ico">💨</span><span class="lbl">DASH / K</span>';
+    }
+  };
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'f' || e.key === 'F'){ keys['j'] = true; keys['f'] = true; }
+  }, {passive:false});
+  window.addEventListener('keyup', (e)=>{
+    if(e.key === 'f' || e.key === 'F'){ keys['j'] = false; keys['f'] = false; }
+  }, {passive:false});
+
+  const originalInteractNPC = typeof interactNPC === 'function' ? interactNPC : null;
+  if(originalInteractNPC){
+    interactNPC = function(npc){
+      if(['pirpir','minti','tikir','boncuk'].includes(npc.dialogKey)){
+        const texts = {
+          pirpir:'Raflarda ne kadar çok kitap toplarsan enerjin o kadar dengeli akar.',
+          minti:'Her rün bir sorunun cevabıdır; üçü birleşince kapıların dili çözülür.',
+          tikir:'Yüksek raflar çoğu zaman ikinci yolu saklar. Platformları zincir gibi düşün.',
+          boncuk:'Cehalet Gölgesi acele ederken hata yapar; seri atışlarla boşluklarını yakala.'
+        };
+        setDialogue(npc.name, npc.emoji, texts[npc.dialogKey], npc.tint);
+        if(npc.dialogKey === 'pirpir') player.hp = Math.min(player.maxHp, player.hp + 8);
+        if(npc.dialogKey === 'minti') player.shieldTime = Math.max(player.shieldTime, 2.6);
+        if(npc.dialogKey === 'tikir') player.jump += 35;
+        if(npc.dialogKey === 'boncuk') player.score += 150;
+        return;
+      }
+      return originalInteractNPC(npc);
+    }
+  }
+
+  const originalLoopStart = startGame;
+  startGame = function(){
+    originalLoopStart();
+    showStory('Tek kişilik bilgi yolculuğu başladı. Bölümler ilerledikçe tempo yükselecek.');
+  };
+})();
+</script>
 
 </body>
 </html>
