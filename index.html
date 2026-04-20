@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8l7NQ8V+3GTHR4ynLvJ7XG4bV13mB9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* ============================================================
        KAWAII / CHILD-FRIENDLY DESIGN TOKENS
@@ -1181,6 +1182,79 @@
       content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);
       width:3px;height:8px;background:#7cc7ff;border-radius:2px;
     }
+    .footer{
+      position:fixed;
+      left:50%;
+      bottom:10px;
+      transform:translateX(-50%);
+      z-index:12;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      width:min(calc(100vw - 24px), 980px);
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.86);
+      border:2px solid rgba(90,106,127,.18);
+      box-shadow:0 8px 26px rgba(44,52,65,.16);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      pointer-events:auto;
+    }
+    .footer .logo{
+      font-family:'Fredoka','Baloo 2',sans-serif;
+      font-weight:800;
+      font-size:14px;
+      color:var(--ink);
+      letter-spacing:.04em;
+      white-space:nowrap;
+    }
+    .footer .tagline{
+      font-size:12px;
+      font-weight:800;
+      color:var(--ink-soft);
+      white-space:nowrap;
+    }
+    .footer .links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footer .links a{
+      text-decoration:none;
+      color:var(--ink);
+      font-weight:800;
+      font-size:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#fff;
+      border:1.5px solid rgba(90,106,127,.14);
+      box-shadow:var(--shadow-sm);
+    }
+    .footer .links a:hover{transform:translateY(-1px)}
+    .footer small{
+      font-size:11px;
+      color:var(--ink-mute);
+      font-weight:800;
+      white-space:nowrap;
+    }
+    @media (max-width: 900px){
+      .footer{gap:10px;padding:10px 14px;bottom:8px;border-radius:26px}
+      .footer .logo,.footer .tagline,.footer small{white-space:normal;text-align:center}
+    }
+    @media (max-width: 640px){
+      .footer{width:min(calc(100vw - 16px), 98vw);gap:8px;padding:9px 12px;bottom:6px}
+      .footer .logo{font-size:12px}
+      .footer .tagline,.footer .links a,.footer small{font-size:10px}
+      .footer .links{justify-content:center}
+    }
+
   </style>
 </head>
 <body>
@@ -4702,6 +4776,17 @@
   };
 })();
 </script>
+
+
+<footer class="footer">
+  <div class="logo">☪ Library Games &nbsp;AI'HAN ACADEMY</div>
+  <div class="tagline">Think • Code • Learn • Create! 🚀</div>
+  <div class="links">
+    <a href="https://www.linkedin.com/in/ayhanbozkurt/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/ayhanbzkrt" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+  </div>
+  <small>© 2026 AI'Han Library Games • by Ayhan Bozkurt </small>
+</footer>
 
 </body>
 </html>
